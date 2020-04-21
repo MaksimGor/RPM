@@ -1,9 +1,11 @@
 #include "menu.h"
 #include "ui_menu.h"
 #include "client.h"
-#include "ui_dialog.h"
-
-
+#include <QFile>
+/**
+ * @brief Создание окна, подключение к чату
+ * @author Maxim Gordienko
+ */
 menu::menu(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::menu)
@@ -15,7 +17,10 @@ menu::~menu()
 {
     delete ui;
 }
-
+/**
+ * @brief Создание окна чата
+ * @author Maxim Gordienko
+ */
 void menu::on_connect_clicked()
 {
     QString path = QCoreApplication::applicationDirPath();

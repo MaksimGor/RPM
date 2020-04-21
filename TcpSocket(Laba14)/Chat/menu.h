@@ -2,7 +2,10 @@
 #define MENU_H
 
 #include <QMainWindow>
-
+/**
+ * @brief класс menu
+ * @author Maxim Gordienko
+ */
 namespace Ui {
 class menu;
 }

@@ -1,9 +1,12 @@
 #include "client.h"
-#include "ui_dialog.h"
+#include "ui_client.h"
 #include <QDebug>
 #include <QMessageBox>
 #include <QWidget>
-
+/**
+ * @brief Создание окна и подключение к серверу
+ * @author Maxim Gordienko
+ */
 Client::Client(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Client)
@@ -22,12 +25,18 @@ Client::Client(QWidget *parent)
     connect(ui->pushButton, &QPushButton::clicked,this, &Client::ButtonAction);
     connect(sockCl, &QTcpSocket::disconnected,this, &Client::serverDisconnect);
 }
-
+/**
+ * @brief Удаление окна
+ * @author Maxim Gordienko
+ */
 Client::~Client()
 {
     delete ui;
 }
-
+/**
+ * @brief Ввод сообщения
+ * @author Maxim Gordienko
+ */
 void Client::ButtonAction()
 {
     QFile file(QCoreApplication::applicationDirPath()+"/Name.txt");
@@ -46,7 +55,10 @@ void Client::ButtonAction()
     }
 
 }
-
+/**
+ * @brief Вывод на экран
+ * @author Maxim Gordienko
+ */
 void Client::readSocket()
 {
     QString data = QString(sockCl->readAll());
@@ -61,13 +73,48 @@ void Client::readSocket()
     myStringList.first() = " ";
     QString str = myStringList.join(" ");
     str = "<div><font color=\"black\">"+str+"</font></div>";
-    ui->textEdit->setTextColor(QColor(0,255,0));
+    palitText();
     ui->textEdit->append(name);
     ui->textEdit->insertHtml(str);
     }
 }
-
+/**
+ * @brief Покинули чат
+ * @author Maxim Gordienko
+ */
 void Client::serverDisconnect()
 {
     QMessageBox::information(NULL,QObject::tr("Информация"),tr("Вы покинули чат"));
+}
+/**
+ * @brief Выбор цвета пользователя
+ * @author Maxim Gordienko
+ */
+void Client::palitText()
+{
+    if (type == "Red")
+    {
+        ui->textEdit->setTextColor(QColor(255,7,7));
+
+    }
+    else if (type == "Green")
+    {
+        ui->textEdit->setTextColor(QColor(7,240,7));;
+    }
+    else if (type == "Yellow")
+    {
+        ui->textEdit->setTextColor(QColor(240,240,7));;
+    }
+    else if (type == "Blue")
+    {
+        ui->textEdit->setTextColor(QColor(7,34,240));;
+    }
+}
+/**
+ * @brief Выбор цвета пользователя из комбокс
+ * @author Maxim Gordienko
+ */
+void Client::on_comboBox_activated(const QString &arg1)
+{
+    type = arg1;
 }

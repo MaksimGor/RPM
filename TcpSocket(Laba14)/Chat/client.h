@@ -5,6 +5,10 @@
 #include <QtNetwork>
 #include <iostream>
 #include "menu.h"
+/**
+ * @brief класс client
+ * @author Maxim Gordienko
+ */
 namespace Ui {
 class Client;
 }
@@ -23,10 +27,13 @@ private:
     QTcpSocket *sockCl;
     QString Name;
     int chat = 0;
+    QString type = "Red";
 private slots:
     void ButtonAction();
     void readSocket();
     void serverDisconnect();
+    void on_comboBox_activated(const QString &arg1);
+    void palitText();
 };
 
 #endif // DIALOG_H

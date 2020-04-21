@@ -29,7 +29,7 @@ FORMS += \
     menu.ui
 
 TRANSLATIONS += \
-    Laba5_myv_RU.ts
+    Chat_ba_RU.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
