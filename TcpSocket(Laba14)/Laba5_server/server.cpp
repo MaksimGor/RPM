@@ -63,20 +63,25 @@ void server::ClientAction()
     QTextStream stream (clientSocket);
     QString nickname;
     QString message;
-    for (int i = 0;i < 2;i++){
-        if (i == 0) stream >> nickname;
-        else if (i == 1) stream >> message;
+    QString str, str1, type;
+    for (int i = 0;i < 100;i++){
+        if(i==0){stream >> type;}
+        else if((i>0)&&(i < 3)) {stream >> str;
+        nickname+=" "+str;}
+        else if (i > 3) {stream >> str1;
+        message+=" "+str1;}    
     }
+    qDebug() << nickname;
     qInfo() << QString::fromUtf8( "Получить сообщение от ") << nickname << "- " << message;
 
     foreach (client, clients){
         QTcpSocket* clSock = (QTcpSocket*) client;
         QTextStream str (clSock);
-        str << nickname + " - " + message;
+        str << type+" "+ nickname + " - " + message;
     }
 
     file.setFileName("Client.txt");
-    list.push_back(nickname + " " + message);
+    list.push_back(nickname + " - " + message+"\n");
 
     if(!file.open(QIODevice::WriteOnly)){
         qInfo() << QString::fromUtf8("Файл не открывается...");
@@ -126,23 +131,20 @@ void server::Message() {
     QTcpSocket* clSock = (QTcpSocket*) client;
     QTextStream str (clSock);
     QTextStream stream(&file);
-    int i = 0;
-    while(!stream.atEnd()){
-        QString st;
-        i++;
-        stream >> st;
-        if (((i % 2) == 1)&&(st != ""))
+    QString stn,sts;
+    QFile file("Client.txt");
+        if(file.open(QIODevice::ReadOnly |QIODevice::Text))
         {
-            str << st + " - ";
+            while(!file.atEnd())
+            {
+                QString st = file.readLine();
+                str << st;
+            }
+        file.close();
         }
-        else {
-            str << st;
-            if(!stream.atEnd())
-                str<<endl;
+        else
+        {
+            qDebug()<< "don't open file";
         }
-    }
-    if(k == 0)
-        k += i/2;
-    file.close();
 }
 

@@ -33,7 +33,7 @@
     <item>
      <widget class="QLineEdit" name="name">
       <property name="text">
-       <string>Введите имя</string>
+       <string>Введите Имя и Фамилию</string>
       </property>
      </widget>
     </item>

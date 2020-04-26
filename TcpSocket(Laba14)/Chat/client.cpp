@@ -50,7 +50,7 @@ void Client::ButtonAction()
              return;
         }
     else{
-    sockCl->write( Name.toUtf8() + " " + ui->message->text().toUtf8());
+    sockCl->write( type.toUtf8()+ " " + Name.toUtf8() + " " + ui->message->text().toUtf8());
     return;
     }
 
@@ -69,8 +69,11 @@ void Client::readSocket()
     else
     {
     QStringList myStringList = data.split(" ");
-    QString name = myStringList.first();
-    myStringList.first() = " ";
+    type = myStringList[0];
+    QString name = myStringList[2]+" "+myStringList[3]+" ";
+    myStringList[0].clear();
+    myStringList[2].clear();
+    myStringList[3].clear();
     QString str = myStringList.join(" ");
     str = "<div><font color=\"black\">"+str+"</font></div>";
     palitText();

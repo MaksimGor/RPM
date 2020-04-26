@@ -23,15 +23,24 @@ menu::~menu()
  */
 void menu::on_connect_clicked()
 {
-    QString path = QCoreApplication::applicationDirPath();
     Name = ui->name->text();
-    QFile file(path+"/Name.txt");
-    file.open(QIODevice::WriteOnly);
-    file.write(Name.toUtf8());
-    file.close();
-    Client window;
-    window.setModal(true);
-    window.exec();
+    int wordCount = Name.split(" ").count();
+    if(wordCount!=2)
+    {
+       ui->name->setText("Введите Фамилию и Имя еще раз");
+    }
+    else
+    {
+        QString path = QCoreApplication::applicationDirPath();
+        QFile file(path+"/Name.txt");
+        file.open(QIODevice::WriteOnly);
+        file.write(Name.toUtf8());
+        file.close();
+        Client window;
+        window.setModal(true);
+        window.exec();
+    }
+
 }
 
 
