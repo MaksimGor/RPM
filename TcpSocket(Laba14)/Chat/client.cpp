@@ -39,12 +39,15 @@ Client::~Client()
  */
 void Client::ButtonAction()
 {
+    Me_message = 1;
+    if(chat == 0){
     QFile file(QCoreApplication::applicationDirPath()+"/Name.txt");
     if(file.open(QIODevice::ReadOnly)){
             Name = file.readLine();
             file.close();
             chat = 1;
         }
+    }
     if (ui->message->text().toUtf8() == ""){
              QMessageBox::information(NULL,QObject::tr("Ошибка"),tr("Введите сообщение"));
              return;
@@ -53,7 +56,6 @@ void Client::ButtonAction()
     sockCl->write( type.toUtf8()+ " " + Name.toUtf8() + " " + ui->message->text().toUtf8());
     return;
     }
-
 }
 /**
  * @brief Вывод на экран
@@ -70,6 +72,10 @@ void Client::readSocket()
     {
     QStringList myStringList = data.split(" ");
     type = myStringList[0];
+    if( Me_message == 1){
+        type = ui->Color->text();
+        Me_message = 0;
+    }
     QString name = myStringList[2]+" "+myStringList[3]+" ";
     myStringList[0].clear();
     myStringList[2].clear();
@@ -120,4 +126,5 @@ void Client::palitText()
 void Client::on_comboBox_activated(const QString &arg1)
 {
     type = arg1;
+    ui->Color->setText(arg1);
 }

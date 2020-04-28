@@ -31,7 +31,7 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>111</width>
+     <width>101</width>
      <height>32</height>
     </rect>
    </property>
@@ -82,6 +82,23 @@
     </item>
    </layout>
   </widget>
+  <widget class="QLabel" name="Color">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>20</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Red</string>
+   </property>
+  </widget>
+  <zorder>Color</zorder>
+  <zorder>textEdit</zorder>
+  <zorder>comboBox</zorder>
+  <zorder>horizontalLayoutWidget</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -28,6 +28,7 @@ private:
     QString Name;
     int chat = 0;
     QString type = "Red";
+    int Me_message = 0;
 private slots:
     void ButtonAction();
     void readSocket();
