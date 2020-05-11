@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>747</width>
-    <height>597</height>
+    <width>757</width>
+    <height>706</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -71,7 +71,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>320</y>
+     <y>470</y>
      <width>111</width>
      <height>31</height>
     </rect>
@@ -85,7 +85,7 @@
     <rect>
      <x>30</x>
      <y>200</y>
-     <width>681</width>
+     <width>691</width>
      <height>47</height>
     </rect>
    </property>
@@ -110,9 +110,9 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>360</y>
-     <width>681</width>
-     <height>231</height>
+     <y>500</y>
+     <width>701</width>
+     <height>201</height>
     </rect>
    </property>
   </widget>
@@ -276,7 +276,7 @@
     <rect>
      <x>30</x>
      <y>130</y>
-     <width>681</width>
+     <width>691</width>
      <height>33</height>
     </rect>
    </property>
@@ -360,10 +360,10 @@
   <widget class="QLabel" name="ErrorDate_2">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>330</y>
-     <width>491</width>
-     <height>16</height>
+     <x>120</x>
+     <y>260</y>
+     <width>381</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
@@ -388,7 +388,7 @@
     <rect>
      <x>30</x>
      <y>280</y>
-     <width>681</width>
+     <width>691</width>
      <height>38</height>
     </rect>
    </property>
@@ -436,6 +436,118 @@
      <string>Запросы</string>
     </property>
    </item>
+  </widget>
+  <widget class="QLabel" name="ConnectandInquiry_3">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>320</y>
+     <width>451</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Построчное редактирование шаблонных таблиц&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_4">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>360</y>
+     <width>691</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_4">
+    <item>
+     <widget class="QLineEdit" name="id_Name">
+      <property name="text">
+       <string>id_employee</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="Data_id">
+      <property name="text">
+       <string>Данные</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="Save">
+      <property name="text">
+       <string>Сохранить</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_5">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>400</y>
+     <width>691</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_5">
+    <item>
+     <widget class="QLineEdit" name="Name">
+      <property name="text">
+       <string>Name</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="DATA_Name">
+      <property name="text">
+       <string>Данные</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="Delete">
+      <property name="text">
+       <string>   Удалить   </string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_6">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>440</y>
+     <width>691</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_6">
+    <item>
+     <widget class="QLineEdit" name="Sex">
+      <property name="text">
+       <string>Sex</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="DATA_SEX">
+      <property name="text">
+       <string>Данные</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="Push">
+      <property name="text">
+       <string>  Добавить </string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

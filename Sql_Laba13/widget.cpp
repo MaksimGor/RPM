@@ -115,7 +115,7 @@ void Widget::on_DeleteNote_clicked()
         }
         else
         {
-            ui->connectError->clear();
+            ui->ErrorCreate->clear();
             Model(tableName);
         }
 }
@@ -142,6 +142,7 @@ void Widget::on_ZaprosButton_clicked()
            ui->ErrorDate_2->setText("Запрос не выполнен");
         }
     else{
+            ui->ErrorDate_2->clear();
             ui->SaveZP->addItems(zapros);
         }
 
@@ -221,6 +222,7 @@ void Widget::Model(const QString &arg1)
 // Получения названия таблицы из combox
 void Widget::on_comboBox_activated(const QString &arg1)
 {
+    types = arg1;
      Model(arg1);
 }
 void Widget::on_Type_activated(const QString &arg1)
@@ -242,4 +244,57 @@ void Widget::on_SaveZP_activated(const QString &zapros)
         if(!b_table){
            ui->ErrorDate_2->setText("Запрос не выполнен");
         }
+}
+
+void Widget::on_Save_clicked()
+{
+    QSqlQuery query;
+    QString table = "UPDATE " + types +" "+ "SET"+" "+" "
+            + ui->Name->text()+"='"+ ui->DATA_Name->text()+"'," +" "+ ui->Sex->text()+"='"+ ui->DATA_SEX->text()+
+            "' where "+ui->id_Name->text()+"="+ ui->Data_id->text() +";";
+    bool b_table = query.exec(table);
+        if(!b_table)
+        {
+           ui->ErrorCreate->setText("Не добавить данные, ошибка в данных!");
+        }
+        else
+        {
+            ui->connectError->clear();
+            Model(types);
+        }
+}
+
+void Widget::on_Delete_clicked()
+{
+    QSqlQuery query;
+    QString table = "DELETE FROM " + types +
+            " WHERE "+ui->id_Name->text()+" == "+ ui->Data_id->text()  +";";
+    bool b_table = query.exec(table);
+        if(!b_table)
+        {
+           ui->ErrorCreate->setText("Не удалить строку!");
+        }
+        else
+        {
+            ui->connectError->clear();
+            Model(types);
+        }
+}
+
+void Widget::on_Push_clicked()
+{
+
+        QSqlQuery query;
+        QString table = "INSERT INTO " + types +
+                 " VALUES ( "+ ui->Data_id->text() +" ,'"+ui->DATA_Name->text()+"','"+ ui->DATA_SEX->text()+"');";
+        bool b_table = query.exec(table);
+            if(!b_table)
+            {
+               ui->ErrorCreate->setText("Не удалить строку!");
+            }
+            else
+            {
+                ui->ErrorCreate->clear();
+                Model(types);
+            }
 }

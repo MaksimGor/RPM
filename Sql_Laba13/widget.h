@@ -59,6 +59,12 @@ private slots:
 
     void on_SaveZP_activated(const QString &arg1);
 
+    void on_Save_clicked();
+
+    void on_Delete_clicked();
+
+    void on_Push_clicked();
+
 private:
     Ui::Widget *ui;
     QSqlDatabase db;
@@ -66,5 +72,6 @@ private:
     QSqlTableModel* model;
     int countTable;
     QString type;
+    QString types;
 };
 #endif // WIDGET_H
