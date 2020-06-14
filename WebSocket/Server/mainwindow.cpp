@@ -7,17 +7,16 @@
 #include <QDebug>
 #include <QMessageBox>
 
-/**
- * @file mainwindow.cpp
- * @author Гордиенко максим
- */
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-
     ui->setupUi(this);
+    if(Save == 0)
+    {
+        ui->onoff->setStyleSheet(QString::fromUtf8("background-color: rgb(250, 50, 50);"));
+    }
+        ui->onoff->setText(" ");
         this->setWindowTitle("Server");
         trayIcon = new QSystemTrayIcon(this);
         trayIcon->setIcon(this->style()->standardIcon(QStyle::SP_ComputerIcon));
@@ -36,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
         connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
                 this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
         connect(this, SIGNAL(callapse()),this,SLOT(on_callapse_clicked()));
+
 }
 
 MainWindow::~MainWindow()
@@ -122,7 +122,20 @@ void MainWindow::get_info(QString info){
     ui->textEdit->append(info);
 }
 
-void MainWindow::set_settings()
+void MainWindow::on_onoff_clicked()
+{
+    if (Save == 0){
+    ui->onoff->setText("Отключить");
+    Save = 1;
+    }
+    else{
+    Save = 0;
+    ui->onoff->setText("Запустить");
+    }
+    server_start();
+}
+
+void MainWindow::on_SaveSetting_clicked()
 {
     QString host;
     quint16 port;
@@ -135,17 +148,4 @@ void MainWindow::set_settings()
     } else {port = ui->port->displayText().toUInt();}
 
     server->set_settings(host, port);
-}
-
-void MainWindow::on_onoff_clicked()
-{
-    ui->onoff->setText("Отключить");
-    if (Save == 0){
-    Save = 1;
-    }
-    else{
-    ui->onoff->setText("Запустить");
-    Save = 0;
-    }
-    server_start();
 }

@@ -5,10 +5,7 @@
 #include <QWebSocketServer>
 #include <QSettings>
 #include <QSqlDatabase>
-/**
- * @file server.h
- * @author Гордиенко максим
- */
+
 class Server : public QObject
 {
     Q_OBJECT

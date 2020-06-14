@@ -8,10 +8,7 @@
 #include "server.h"
 #include <QSystemTrayIcon>
 #include <QAction>
-/**
- * @file mainwindow.h
- * @author Гордиенко максим
- */
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -31,6 +28,7 @@ private slots:
     void on_callapse_clicked();
     void exit();
     void on_onoff_clicked();
+    void on_SaveSetting_clicked();
 
 private:
     Ui::MainWindow * ui;
@@ -42,7 +40,6 @@ private:
     void show_elements();
     void server_start();
     void get_info(QString info);
-    void set_settings();
 signals:
     void callapse();
     void onoff_clicked();

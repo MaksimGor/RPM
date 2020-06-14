@@ -6,11 +6,6 @@
 #include <QSqlQuery>
 #include <QFile>
 
-/**
- * @file server.cpp
- * @author Гордиенко максим
- */
-
 Server::Server(QObject *parent) : QObject(parent),
     webServer (new QWebSocketServer(QStringLiteral("Сервер"),
                                     QWebSocketServer::NonSecureMode,
@@ -128,26 +123,12 @@ void Server::run_client_action(QString message)
     QString nick, mes;
     QStringList mesList;
     mesList = message.split(" ");
-    int Amount = mesList[0].toInt();
+    nick = mesList[0];
     mesList[0].clear();
-    if (Amount == 1){
-    nick = mesList[1];
-    mesList[1].clear();
     mes = mesList.join(" ");
     emit info("Получить сообщение от " + nick + ": " + mes);
     sender(nick + ": " + mes);
     record_message(nick, mes);
-    }
-    else
-    {
-        nick = mesList[1]+" "+mesList[2];
-        mesList[1].clear();
-        mesList[2].clear();
-        mes = mesList.join(" ");
-        emit info("Получить сообщение от " + nick + ": " + mes);
-        sender(nick + ": " + mes);
-        record_message(nick, mes);
-    }
 }
 
 void Server::disconnectUser() {
