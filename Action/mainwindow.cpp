@@ -5,12 +5,12 @@
 
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
+: QMainWindow(parent)
 
 {
     widjet = new QWidget(this);
     this->setCentralWidget(widjet);
-
+    
     vLayout = new QVBoxLayout(widjet);
     tableWidget = new QTableWidget(widjet);
     tableWidget->setRowCount(rowCount);
@@ -28,15 +28,15 @@ MainWindow::MainWindow(QWidget *parent)
     vLayout->addLayout(hButLayout);
     vLayout->addWidget(tableWidget);
     vLayout->addWidget(saveTable);
-
-
-
+    
+    
+    
     widjet->setLayout(vLayout);
 }
 
 MainWindow::~MainWindow()
 {
-
+    
 }
 
 void MainWindow::addColumn()
@@ -49,31 +49,35 @@ void MainWindow::addRow()
 {
     rowCount+=1;
     tableWidget->setRowCount(rowCount);
-
+    
 }
 
 void MainWindow::save()
 {
-    QAxObject *mExcel = new QAxObject("Excel.Application",this);
-    QAxObject *workbooks = mExcel->querySubObject("Workbooks");
-    QAxObject *workbook = workbooks->querySubObject( "Open(const QString&)", QFileDialog::getOpenFileNames() );
-    QAxObject *mSheets = workbook->querySubObject( "Sheets" );
-    QAxObject *StatSheet = mSheets->querySubObject( "Item(const QVariant&)", QVariant("Лист1") );
+    QAxObject* excel = new QAxObject("Excel.Application", this);
+    QAxObject* workbooks = excel->querySubObject("Workbooks");
+    QAxObject* workbook = workbooks->querySubObject("Open(const QString&)", QFileDialog::getOpenFileNames());
+    QAxObject* sheets = workbook->querySubObject("Sheets");
+    QAxObject* sheet = sheets->querySubObject("Item(int)", 1);
+    
     for(int i=0;i<rowCount;i++){
         for(int j=0;j<columnCount;j++){
-            QAxObject* cell = StatSheet->querySubObject("Cells(QVariant,QVariant)", i+1, j+1);
-            cell->setProperty("Value", tableWidget->item(i,j)->text());
+            QAxObject* cell = sheet->querySubObject("Cells(QVariant,QVariant)", i+1, j+1);
+            if(tableWidget->item(i,j)!=0) cell->setProperty("Value",QVariant(tableWidget->item(i,j)->data(0)));
+            else cell->setProperty("Value"," ");
             delete cell;
         }
     }
-
-    delete StatSheet;
-    delete mSheets;
+    
     workbook->dynamicCall("Save()");
+    delete sheet;
+    delete sheets;
     delete workbook;
     delete workbooks;
-    mExcel->dynamicCall("Quit()");
-    delete mExcel;
-
+    excel->dynamicCall("Quit()");
+    delete excel;
+    
+    
 }
+
 
